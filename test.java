@@ -1,22 +1,29 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
-public class test
+public class test implements ActionListener
 {
   JButton start =new JButton ("        Play        ");
   JButton exit = new JButton("        Exit        ");
   JButton instructions = new JButton("Instructions");
   JButton highScores= new JButton("High Scores");
   JFrame window =new JFrame();
+  JPanel mainMenu = new JPanel();
+  JPanel other = new JPanel();
   SpringLayout layout=new SpringLayout();
   
   public test()
   {
-    window.setLayout(layout);
-    window.add(start);
-    window.add(instructions);
-    window.add(highScores);
-    window.add(exit);
+    window.add(mainMenu);
+    mainMenu.setLayout(layout);
+    mainMenu.add(start);
+    mainMenu.add(instructions);
+    mainMenu.add(highScores);
+    mainMenu.add(exit);
+    exit.addActionListener(this);
+    start.addActionListener(this);
+    highScores.addActionListener(this);
+    instructions.addActionListener(this);
     layout.putConstraint(SpringLayout.WEST,start,200,SpringLayout.WEST,window);
     layout.putConstraint(SpringLayout.NORTH,start,100,SpringLayout.NORTH,window);
     layout.putConstraint(SpringLayout.WEST,instructions,200,SpringLayout.WEST,window);
@@ -29,8 +36,9 @@ public class test
     window.setSize(500,500);
     window.setVisible(true);
     System.out.println("Potato");
+    
   }
-  public void actionPerformed(ActionEvent ae)
+public void actionPerformed (ActionEvent ae)
   {
     if (ae.getActionCommand().equals("Instructions"))
     {System.out.println("This feature is not implemented");
