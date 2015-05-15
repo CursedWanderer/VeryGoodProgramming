@@ -4,7 +4,7 @@ public class testFrame extends test
   {super();
   }
   public static void main (String [] arghs)
-{
+  {
     testFrame t= new testFrame();
-}
+  }
 }

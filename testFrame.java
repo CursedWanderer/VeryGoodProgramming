@@ -1,10 +1,10 @@
-public class testFrame extends test
+public class testFrame
 {
   public testFrame ()
-  {super();
+  {
   }
   public static void main (String [] arghs)
   {
-    testFrame t= new testFrame();
+    new MainMenu();
   }
 }

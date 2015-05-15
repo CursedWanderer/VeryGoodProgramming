@@ -10,7 +10,7 @@ import java.io.*;
  * JPanel mainMenu creates a panel that holds the main menu
  * SpringLayout layout is used to properly space out the buttons.
 */
-public class mainMenu extends testFrame implements ActionListener
+public class MainMenu extends testFrame implements ActionListener
 {
   JButton start =new JButton ("        Play        ");
   JButton exit = new JButton("        Exit        ");
@@ -20,7 +20,7 @@ public class mainMenu extends testFrame implements ActionListener
   JPanel mainMenu = new JPanel();
   SpringLayout layout=new SpringLayout();
   
-  public mainMenu()
+  public MainMenu()
   {
     window.add(mainMenu);
     mainMenu.setLayout(layout);
