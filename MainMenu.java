@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
+import javax.swing.*;
 /*
  * JButton start will allow the user to begin playing
  * JButton exit will allow the user to close the game
@@ -10,7 +11,7 @@ import java.io.*;
  * JPanel mainMenu creates a panel that holds the main menu
  * SpringLayout layout is used to properly space out the buttons.
 */
-public class MainMenu extends testFrame implements ActionListener, KeyListener
+public class MainMenu extends testFrame implements ActionListener
 {
   JButton start =new JButton ("        Play        ");
   JButton exit = new JButton("        Exit        ");
@@ -22,13 +23,15 @@ public class MainMenu extends testFrame implements ActionListener, KeyListener
   
   public MainMenu()
   {
+//Action action = new Action();
+    mainMenu.getInputMap().put(KeyStroke.getKeyStroke("UP"),"doSomething");
+    mainMenu.getActionMap().put("doSomething",new pauseAction("Pause"));
     window.add(mainMenu);
     mainMenu.setLayout(layout);
     mainMenu.add(start);
     mainMenu.add(instructions);
     mainMenu.add(highScores);
     mainMenu.add(exit);
-    window.addKeyListener(this);
     exit.addActionListener(this);
     start.addActionListener(this);
     highScores.addActionListener(this);
@@ -45,7 +48,12 @@ public class MainMenu extends testFrame implements ActionListener, KeyListener
     window.setSize(1000,560);
     window.setVisible(true);
     System.out.println("Potato");
-    
+//    while (true)
+//    {
+//     if (action.getValue())
+//     {
+//     }
+//    }
   }
   /*
    * Action performed allow the program to asses which button was pressed
@@ -70,18 +78,20 @@ public void actionPerformed (ActionEvent ae)
           System.out.println("This feature is not implemented");
         }
   }
-  public void keyTyped ( KeyEvent e)
+private class pauseAction extends AbstractAction
+{
+  String pause;
+  pauseAction (String p)
   {
-    System.out.println(e.getKeyChar());
-    if (e.getKeyChar()=='p')
-    {
-      System.out.println("P");
+   pause=p;
+  }
+  public void actionPerformed(ActionEvent e)
+  {
+    if (pause.equalsIgnoreCase("pause"))
+          {
+      System.out.println("PAUSED");
     }
   }
-  public void keyPressed (KeyEvent e)
-  {
-  }
-  public void keyReleased(KeyEvent e)
-  {
-  }
+  
+}
 }
