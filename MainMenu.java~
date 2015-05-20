@@ -10,7 +10,7 @@ import java.io.*;
  * JPanel mainMenu creates a panel that holds the main menu
  * SpringLayout layout is used to properly space out the buttons.
 */
-public class MainMenu extends testFrame implements ActionListener, KeyListener
+public class MainMenu extends testFrame implements ActionListener
 {
   JButton start =new JButton ("        Play        ");
   JButton exit = new JButton("        Exit        ");
@@ -28,7 +28,6 @@ public class MainMenu extends testFrame implements ActionListener, KeyListener
     mainMenu.add(instructions);
     mainMenu.add(highScores);
     mainMenu.add(exit);
-    window.addKeyListener(this);
     exit.addActionListener(this);
     start.addActionListener(this);
     highScores.addActionListener(this);
@@ -42,7 +41,7 @@ public class MainMenu extends testFrame implements ActionListener, KeyListener
     layout.putConstraint(SpringLayout.WEST,highScores,200,SpringLayout.WEST,window);
     layout.putConstraint(SpringLayout.NORTH,highScores,200,SpringLayout.WEST,window);
     
-    window.setSize(1000,560);
+    window.setSize(500,500);
     window.setVisible(true);
     System.out.println("Potato");
     
@@ -69,19 +68,5 @@ public void actionPerformed (ActionEvent ae)
         {
           System.out.println("This feature is not implemented");
         }
-  }
-  public void keyTyped ( KeyEvent e)
-  {
-    System.out.println(e.getKeyChar());
-    if (e.getKeyChar()=='p')
-    {
-      System.out.println("P");
-    }
-  }
-  public void keyPressed (KeyEvent e)
-  {
-  }
-  public void keyReleased(KeyEvent e)
-  {
   }
 }
