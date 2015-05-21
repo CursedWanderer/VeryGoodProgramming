@@ -13,25 +13,28 @@ import javax.swing.*;
 */
 public class MainMenu extends testFrame implements ActionListener
 {
+  int currentPanel=0;
   JButton start =new JButton ("        Play        ");
   JButton exit = new JButton("        Exit        ");
   JButton instructions = new JButton("Instructions");
   JButton highScores= new JButton("High Scores");
+  JButton returnButton = new JButton("Return");
   JFrame window =new JFrame("Geo-Globe Trotters");
   JPanel mainMenu = new JPanel();
+  JPanel pauseScreen = new JPanel();
   SpringLayout layout=new SpringLayout();
   
   public MainMenu()
   {
 //Action action = new Action();
-    mainMenu.getInputMap().put(KeyStroke.getKeyStroke("UP"),"doSomething");
-    mainMenu.getActionMap().put("doSomething",new pauseAction("Pause"));
+   
     window.add(mainMenu);
     mainMenu.setLayout(layout);
     mainMenu.add(start);
     mainMenu.add(instructions);
     mainMenu.add(highScores);
     mainMenu.add(exit);
+    pauseScreen.add(returnButton);
     exit.addActionListener(this);
     start.addActionListener(this);
     highScores.addActionListener(this);
@@ -48,12 +51,11 @@ public class MainMenu extends testFrame implements ActionListener
     window.setSize(1000,560);
     window.setVisible(true);
     System.out.println("Potato");
-//    while (true)
-//    {
-//     if (action.getValue())
-//     {
-//     }
-//    }
+while (true)
+{
+ mainMenu.getInputMap().put(KeyStroke.getKeyStroke("UP"),"doSomething");
+    mainMenu.getActionMap().put("doSomething",new pauseAction("Pause"));
+}
   }
   /*
    * Action performed allow the program to asses which button was pressed
@@ -90,6 +92,19 @@ private class pauseAction extends AbstractAction
     if (pause.equalsIgnoreCase("pause"))
           {
       System.out.println("PAUSED");
+      if (currentPanel==0)
+      {
+        mainMenu.setVisible(false);
+        pauseScreen.setVisible(true);
+      currentPanel=1;
+      }
+      else if (currentPanel==1)
+      {
+        mainMenu.setVisible(true);
+        pauseScreen.setVisible(false);
+        currentPanel=0;
+      }
+      
     }
   }
   
