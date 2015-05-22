@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
+import javax.swing.*;
 /*
  * JButton start will allow the user to begin playing
  * JButton exit will allow the user to close the game
@@ -10,25 +11,30 @@ import java.io.*;
  * JPanel mainMenu creates a panel that holds the main menu
  * SpringLayout layout is used to properly space out the buttons.
 */
-public class MainMenu extends testFrame implements ActionListener, KeyListener
+public class MainMenu extends testFrame implements ActionListener
 {
+  int currentPanel=0;
   JButton start =new JButton ("        Play        ");
   JButton exit = new JButton("        Exit        ");
   JButton instructions = new JButton("Instructions");
   JButton highScores= new JButton("High Scores");
+  JButton returnButton = new JButton("Return");
   JFrame window =new JFrame("Geo-Globe Trotters");
   JPanel mainMenu = new JPanel();
+  JPanel pauseScreen = new JPanel();
   SpringLayout layout=new SpringLayout();
   
   public MainMenu()
   {
+//Action action = new Action();
+   
     window.add(mainMenu);
     mainMenu.setLayout(layout);
     mainMenu.add(start);
     mainMenu.add(instructions);
     mainMenu.add(highScores);
     mainMenu.add(exit);
-    window.addKeyListener(this);
+    pauseScreen.add(returnButton);
     exit.addActionListener(this);
     start.addActionListener(this);
     highScores.addActionListener(this);
@@ -45,7 +51,11 @@ public class MainMenu extends testFrame implements ActionListener, KeyListener
     window.setSize(1000,560);
     window.setVisible(true);
     System.out.println("Potato");
-    
+while (true)
+{
+ mainMenu.getInputMap().put(KeyStroke.getKeyStroke("UP"),"doSomething");
+    mainMenu.getActionMap().put("doSomething",new pauseAction("Pause"));
+}
   }
   /*
    * Action performed allow the program to asses which button was pressed
@@ -70,18 +80,33 @@ public void actionPerformed (ActionEvent ae)
           System.out.println("This feature is not implemented");
         }
   }
-  public void keyTyped ( KeyEvent e)
+private class pauseAction extends AbstractAction
+{
+  String pause;
+  pauseAction (String p)
   {
-    System.out.println(e.getKeyChar());
-    if (e.getKeyChar()=='p')
-    {
-      System.out.println("P");
+   pause=p;
+  }
+  public void actionPerformed(ActionEvent e)
+  {
+    if (pause.equalsIgnoreCase("pause"))
+          {
+      System.out.println("PAUSED");
+      if (currentPanel==0)
+      {
+        mainMenu.setVisible(false);
+        pauseScreen.setVisible(true);
+      currentPanel=1;
+      }
+      else if (currentPanel==1)
+      {
+        mainMenu.setVisible(true);
+        pauseScreen.setVisible(false);
+        currentPanel=0;
+      }
+      
     }
   }
-  public void keyPressed (KeyEvent e)
-  {
-  }
-  public void keyReleased(KeyEvent e)
-  {
-  }
+  
+}
 }

@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
+import javax.swing.*;
 /*
  * JButton start will allow the user to begin playing
  * JButton exit will allow the user to close the game
@@ -22,6 +23,9 @@ public class MainMenu extends testFrame implements ActionListener
   
   public MainMenu()
   {
+//Action action = new Action();
+    mainMenu.getInputMap().put(KeyStroke.getKeyStroke("UP"),"doSomething");
+    mainMenu.getActionMap().put("doSomething",new pauseAction("Pause"));
     window.add(mainMenu);
     mainMenu.setLayout(layout);
     mainMenu.add(start);
@@ -41,10 +45,15 @@ public class MainMenu extends testFrame implements ActionListener
     layout.putConstraint(SpringLayout.WEST,highScores,200,SpringLayout.WEST,window);
     layout.putConstraint(SpringLayout.NORTH,highScores,200,SpringLayout.WEST,window);
     
-    window.setSize(500,500);
+    window.setSize(1000,560);
     window.setVisible(true);
     System.out.println("Potato");
-    
+//    while (true)
+//    {
+//     if (action.getValue())
+//     {
+//     }
+//    }
   }
   /*
    * Action performed allow the program to asses which button was pressed
@@ -69,4 +78,20 @@ public void actionPerformed (ActionEvent ae)
           System.out.println("This feature is not implemented");
         }
   }
+private class pauseAction extends AbstractAction
+{
+  String pause;
+  pauseAction (String p)
+  {
+   pause=p;
+  }
+  public void actionPerformed(ActionEvent e)
+  {
+    if (pause.equalsIgnoreCase("pause"))
+          {
+      System.out.println("PAUSED");
+    }
+  }
+  
+}
 }
